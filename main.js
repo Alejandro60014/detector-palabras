@@ -10,9 +10,28 @@ texto.addEventListener("input", () => {
 });
 //Funcion de normalización de palabras
 function normalize(){
-  return word.toLowerCase().replace("/.|!|,/", "");
+  return frase.toLowerCase().replace("/.|!|,/", "");
+}
+var separateWords = " "
+function separarPalabras(){
+  var separateWord = normalize();
+  separateWords = separateWord.split(" ");     
+  setTimeout(function(){
+    console.log("Hola")
+  }, 5000)
 }
 //Evento de submit
-boton.addEventListener("click", () => {
-  let separateWords = frase.split(" ");     
-})
+boton.addEventListener("click", separarPalabras())
+//Creando hash map
+const palabras = new Map();
+//Iterando elementos de separateWords y añadiéndolos a palabras
+for (let i = 0; i < separateWords.length; i++){
+  palabras.set(separateWords[i], 1);
+  if (palabras.has(separateWords[i])){ //Sumando el valor de la llave
+    var llave = palabras.get(separateWords[i]);
+    llave++;
+    palabras.set(separateWords[i], llave);
+  }
+}
+//Iterando el hash map para obtener la palabra que más se repite
+console.log(palabras.values())
